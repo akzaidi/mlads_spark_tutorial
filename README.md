@@ -110,26 +110,11 @@ Please be aware that you won't access R Server through the head/master/name node
         chmod +x downloadRun.sh
         ./downloadRun.sh
 
-5. If you used an SSH password while creating an HDInsight cluster with R Server, you can skip this step and proceed to the next. If you used an SSH key instead to create the cluster, you must set a password for your SSH user. You will need this password when connecting to RStudio. Run the following commands. When prompted for **Current Kerberos password**, just press **ENTER**.
-
-        passwd remoteuser
-        Current Kerberos password:
-        New password:
-        Retype new password:
-        Current Kerberos password:
-        
-    If your password is successfully set, you should see a message like this.
-
-        passwd: password updated successfully
-
-
-    Exit the SSH session.
-
 6. Create an SSH tunnel to the cluster by mapping `localhost:8787` on the HDInsight cluster to the client machine. You must create an SSH tunnel before opening a new browser session.
 
     * On a Linux client or a Windows client (using [Cygwin](http://www.redhat.com/services/custom/cygwin/)), open a terminal session and use the following command.
 
-            ssh -L 8787:localhost:8787 USERNAME@r-server.CLUSTERNAME-ssh.azurehdinsight.net
+            ssh -L 8787:localhost:8787 USERNAME@r-server.CLUSTERNAME-ed-ssh.azurehdinsight.net
             
         Replace **USERNAME** with an SSH user for your HDInsight cluster, and replace **CLUSTERNAME** with the name of your HDInsight cluster       
 
@@ -142,7 +127,7 @@ Please be aware that you won't access R Server through the head/master/name node
             * **Source port** - The port on the client that you wish to forward. For example, **8787**.
             * **Destination** - The destination that must be mapped to the local client machine. For example, **localhost:8787**.
 
-            ![Create an SSH tunnel](imgs/createsshtunnel.PNG "Create an SSH tunnel")
+            ![Create an SSH tunnel](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/createsshtunnel.png "Create an SSH tunnel")
 
         4. Click **Add** to add the settings, and then click **Open** to open an SSH connection.
         5. When prompted, log in to the server. This will establish an SSH session and enable the tunnel.
