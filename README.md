@@ -49,7 +49,7 @@ Documentation Page: [Getting started with R Server on HDInsight](https://azure.m
 
     **IMPORTANT!**
 
-    * Enter an `admin` as your Cluster Login Username and set a password. 
+    * Enter `admin` as your Cluster Login Username and set a password. 
     * For SSH credentials, set `remoteuser` as your SSH Username, and select password as your authentication type.
     * SSH is used to remotely connect to the cluster using a Secure Shell (SSH) client.
     * If you use anything other than `remoteuser` as your ssh username, you will not be able to run the download scripts.
