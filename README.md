@@ -47,7 +47,12 @@ Documentation Page: [Getting started with R Server on HDInsight](https://azure.m
 
 6. Select **Credentials**, then enter a **Cluster Login Username** and **Cluster Login Password**.
 
-    Enter an __SSH Username__ and select __Password__, then enter the __SSH Password__ to configure the SSH account. SSH is used to remotely connect to the cluster using a Secure Shell (SSH) client.
+    **IMPORTANT!**
+
+    * Enter an `admin` as your Cluster Login Username and set a password. 
+    * For SSH credentials, set `remoteuser` as your SSH Username, and select password as your authentication type.
+    * SSH is used to remotely connect to the cluster using a Secure Shell (SSH) client.
+    * If you use anything other than `remoteuser` as your ssh username, you will not be able to run the download scripts.
     
     Use the __Select__ button to save the credentials.
     
@@ -71,7 +76,7 @@ Documentation Page: [Getting started with R Server on HDInsight](https://azure.m
 
     Use the **Select** button to save the node pricing configuration.
     
-9. On the **New HDInsight Cluster** blade, make sure that **Pin to Startboard** is selected, and then select **Create**. This will create the cluster and add a tile for it to the Startboard of your Azure Portal. The icon will indicate that the cluster is creating, and will change to display the HDInsight icon once creation has completed.
+9. On the **New HDInsight Cluster** blade, make sure that **Pin to Dashboard** is selected, and then select **Create**. This will create the cluster and add a tile for it to the Startboard of your Azure Portal. The icon will indicate that the cluster is creating, and will change to display the HDInsight icon once creation has completed.
   
     ![pin to dashboard](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade10.PNG)
 
