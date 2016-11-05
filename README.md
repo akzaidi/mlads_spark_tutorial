@@ -25,11 +25,11 @@ Documentation Page: [Getting started with R Server on HDInsight](https://azure.m
 
 2. Select __NEW__, __Intelligence + analytics__, and then __HDInsight__.
 
-    ![Image of creating a new cluster](imgs/portal-blade3.png)
+    ![Image of creating a new cluster](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade3.PNG)
 
 3. Enter a name for the cluster in the __Cluster Name__ field. If you have multiple Azure subscriptions, use the __Subscription__ entry to select the one you want to use.
 
-    ![Cluster name and subscription selections](imgs/portal-blade4.png)
+    ![Cluster name and subscription selections](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade4.PNG)
 
 4. Select __Select Cluster Type__. On the __Cluster Type__ blade, select the following options:
 
@@ -48,7 +48,7 @@ Documentation Page: [Getting started with R Server on HDInsight](https://azure.m
     
     Use the __Select__ button to save the credentials.
     
-    ![Credentials blade](imgs/portal-blade5.png)
+    ![Credentials blade](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade5.PNG)
 
 7. Select **Data Source** to select a data source for the cluster. 
     * Either select an existing storage account by selecting __Select storage account__ and then selecting the account, or create a new account using the __New__ link in the __Select storage account__ section.
@@ -59,22 +59,22 @@ Documentation Page: [Getting started with R Server on HDInsight](https://azure.m
 
     * Use the **Select** button to save the data source configuration.
     
-    * ![Data source blade](imgs/portal-blade6.png)
+    * ![Data source blade](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade6.PNG)
 
 8. Select **Node Pricing Tiers** to display information about the nodes that will be created for this cluster. Unless you know that you'll need a larger cluster, leave the number of worker nodes at the default of `4`. The estimated cost of the cluster will be shown within the blade.
 
-    ![Node pricing tiers blade](imgs/portal-blade7.png)
-    ![Node prices for d13 v2](imgs/portal-blade8.png)
+    ![Node pricing tiers blade](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade7.PNG)
+    ![Node prices for d13 v2](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade8.PNG)
 
     Use the **Select** button to save the node pricing configuration.
     
 9. On the **New HDInsight Cluster** blade, make sure that **Pin to Startboard** is selected, and then select **Create**. This will create the cluster and add a tile for it to the Startboard of your Azure Portal. The icon will indicate that the cluster is creating, and will change to display the HDInsight icon once creation has completed.
   
-    ![pin to dashboard](imgs/portal-blade10.png)
+    ![pin to dashboard](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade10.PNG)
 
     While provisioning, you'll see the following tile on your dasboard:
 
-    ![provisioning](imgs/portal-blade11.png)
+    ![provisioning](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade11.PNG)
 
     > [AZURE.NOTE] It will take some time for the cluster to be created, usually around 15~40 minutes. Use the tile on the Startboard, or the **Notifications** entry on the left of the page to check on the creation process.
 
@@ -84,8 +84,8 @@ Please be aware that you won't access R Server through the head/master/name node
 1. Find the edge node SSH address by selecting your cluster then, select the *Secure Shell (SSH)* blade on the left. 
     Copy the SSH endpoint for the edge node, not the head node!!
 
-    ![Image of the SSH Endpoint for the edge node](imgs/portal-blade12.png)
-    ![Image of ssh access](imgs/portal-blade13.png)
+    ![Image of the SSH Endpoint for the edge node](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade12.PNG)
+    ![Image of ssh access](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade13.PNG)
 
 2. Connect to the edge node using an SSH client.
     You can ignore SSH keys for the purposes of this lab. In production it is highly recommended that you use SSH keys rather than username/password authentication.
@@ -142,7 +142,7 @@ Please be aware that you won't access R Server through the head/master/name node
             * **Source port** - The port on the client that you wish to forward. For example, **8787**.
             * **Destination** - The destination that must be mapped to the local client machine. For example, **localhost:8787**.
 
-            ![Create an SSH tunnel](imgs/createsshtunnel.png "Create an SSH tunnel")
+            ![Create an SSH tunnel](imgs/createsshtunnel.PNG "Create an SSH tunnel")
 
         4. Click **Add** to add the settings, and then click **Open** to open an SSH connection.
         5. When prompted, log in to the server. This will establish an SSH session and enable the tunnel.
@@ -153,7 +153,7 @@ Please be aware that you won't access R Server through the head/master/name node
 
 8. You will be prompted to enter the SSH username and password to connect to the cluster. If you used an SSH key while creating the cluster, you must enter the password you created in step 5 above.
 
-    ![Connect to R Studio](imgs/connecttostudio.png "Create an SSH tunnel")
+    ![Connect to R Studio](imgs/connecttostudio.PNG "Create an SSH tunnel")
 
 9. To test whether the RStudio installation was successful, you can run a test script that executes R based MapReduce and Spark jobs on the cluster. Go back to the SSH console and enter the following commands to download the test script to run in RStudio.
 
@@ -167,4 +167,4 @@ Please be aware that you won't access R Server through the head/master/name node
 
 10. In RStudio, you will see the test script you downloaded. Double click the file to open it, select the contents of the file, and then click **Run**. You should see the output in the **Console** pane.
  
-    ![Test the installation](imgs/test-r-script.png "Test the installation")
+    ![Test the installation](imgs/test-r-script.PNG "Test the installation")
