@@ -94,7 +94,8 @@ Please be aware that you won't access R Server through the head/master/name node
 
 3. Enter your SSH username and password.
 
-    ![imgs/ssh-login.gif]
+
+![](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/ssh_login.gif)
 
 2. Once you are connected, become a root user on the cluster. In the SSH session, use the following command.
 
