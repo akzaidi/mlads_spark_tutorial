@@ -20,7 +20,7 @@ wget https://raw.githubusercontent.com/akzaidi/spark_nyc_taxi/master/raw_urls.tx
 mkdir data/
 cat raw_urls.txt | xargs -n 1 -P 6 wget -c -P data/
 hadoop fs -mkdir /user/RevoShare/remoteuser/nyctaxi
-hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/nyctaxi/y
+hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/nyctaxi/
 
 
 cd  /home/remoteuser/Code/MRS
