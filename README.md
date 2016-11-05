@@ -136,20 +136,3 @@ Please be aware that you won't access R Server through the head/master/name node
 
         http://localhost:8787/ 
 
-8. You will be prompted to enter the SSH username and password to connect to the cluster. If you used an SSH key while creating the cluster, you must enter the password you created in step 5 above.
-
-    ![Connect to R Studio](imgs/connecttostudio.PNG "Create an SSH tunnel")
-
-9. To test whether the RStudio installation was successful, you can run a test script that executes R based MapReduce and Spark jobs on the cluster. Go back to the SSH console and enter the following commands to download the test script to run in RStudio.
-
-    * If you created a Hadoop cluster with R, use this command.
-        
-            wget http://mrsactionscripts.blob.core.windows.net/rstudio-server-community-v01/testhdi.r
-
-    * If you created a Spark cluster with R, use this command.
-
-            wget http://mrsactionscripts.blob.core.windows.net/rstudio-server-community-v01/testhdi_spark.r
-
-10. In RStudio, you will see the test script you downloaded. Double click the file to open it, select the contents of the file, and then click **Run**. You should see the output in the **Console** pane.
- 
-    ![Test the installation](imgs/test-r-script.PNG "Test the installation")
