@@ -1,4 +1,4 @@
-# Microsoft R with Spark on HDInsight Tutorial at mlads_spark_tutorial
+# Microsoft R with Spark on HDInsight Tutorial at MLADS
 
 *Instructors*: Debraj GuhaThakurta, Mario Inchiosa, Katherine Zhao, Ali Zaidi
 
