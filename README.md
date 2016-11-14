@@ -11,15 +11,6 @@
 
 ## Deploying to Azure
 
-### Using the ARM Template
-
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-hdinsight-rserver-ssh-password%2Fazuredeploy.json" target="_blank">
-<img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
-
-+ [ARM Template](https://azure.microsoft.com/en-us/documentation/templates/101-hdinsight-rserver-ssh-password/)
-
-
 ### Using the Portal
 
 Documentation Page: [Getting started with R Server on HDInsight](https://azure.microsoft.com/en-us/documentation/articles/hdinsight-hadoop-r-server-get-started/ )
