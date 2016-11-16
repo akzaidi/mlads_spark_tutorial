@@ -149,3 +149,23 @@ The Operationalization script, `3-Deploy-Score-Subset.r`, creates and deploys a 
 2. Get your workspace id and keys from the settings pane (tokens in the Authorization Tokens tab)
 
  ![Create an SSH tunnel](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/azureml-wsp.PNG)
+
+
+## Verify Your Cluster
+
+To verify that your cluster is properly set up, run the verification script as follows:
+
+```
+cd /home/remoteuser
+chmod +x verification.sh 
+./verification.sh
+```
+
+Verification should complete in a couple of minutes, and the file `/home/remoteuser/verification.csv` will be created on the edge node. If verification succeeded, `verification.csv` should have the following contents: 
+
+```
+"hdfsFiles","edgeMRSFiles","edgeSparklyRFiles","sparkHPCJob","sparkHPAJob","azureMLExists","rstudioRunning" 
+TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE 
+```
+
+To troubleshoot verification, a directory called /tmp/verif is created on the edge node. This directory contains a log of the verification script’s execution. 

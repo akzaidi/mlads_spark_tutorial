@@ -160,3 +160,4 @@ sudo chmod -R 777 /home/remoteuser/Code
 ###########################################################################
 cd /home/remoteuser/Code
 
+wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/verification.sh
