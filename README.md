@@ -139,4 +139,3 @@ Please be aware that you won't access R Server through the head/master/name node
 7. Open a web browser and enter the following URL based on the port you entered for the tunnel.
 
         http://localhost:8787/ 
-

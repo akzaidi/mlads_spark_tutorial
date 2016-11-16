@@ -36,8 +36,8 @@ wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/m
 mkdir data/
 cd data/
 
-mkdir Airline/AirlineSubsetCsv
-cd Airline/AirlineSubsetCsv
+mkdir AirlineSubsetCsv
+cd AirlineSubsetCsv
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00000
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00001
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00002
@@ -74,8 +74,8 @@ wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00014
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00015
 
-hadoop fs -mkdir /user/RevoShare/remoteuser/Airline/
-hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/Airline/
+hadoop fs -mkdir /HdiSamples/HdiSamples/FlightDelay
+hadoop fs -copyFromLocal data/ /HdiSamples/HdiSamples/FlightDelay/
 
 cd /home/remoteuser
 
