@@ -23,12 +23,14 @@ Documentation Page: [Getting started with R Server on HDInsight](https://azure.m
 3. **IMPORTANT**: **Don't pick** the option for the new "simpler, faster way to create clusters".
 3. Enter a name for the cluster in the __Cluster Name__ field. If you have multiple Azure subscriptions, use the __Subscription__ entry to select the one you want to use.
 
-    ![Cluster name and subscription selections](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade4.PNG)
+    ![Cluster name and subscription selections](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/pick_cluster.PNG)
 
 4. Select __Select Cluster Type__. On the __Cluster Type__ blade, select the following options:
 
     * __Cluster Type__: R Server
-    * Deselect "RStudio Server Community" Install option
+    * __Version__: R Server 8.0 (HDI 3.4)
+        - **DO NOT SELECT R Server 9.0**
+    * **Deselect** "RStudio Server Community edition" install option
         - our script will install RStudio Server for you
     * Leave the other options at the default values, then use the __Select__ button to save the cluster type.
     
@@ -116,7 +118,7 @@ Please be aware that you won't access R Server through the head/master/name node
 
     * On a Linux client or a Windows client (using [Cygwin](http://www.redhat.com/services/custom/cygwin/)), open a terminal session and use the following command.
 
-            ssh -L 8787:localhost:8787 remoteuser@CLUSTERNAME-ed-ssh.azurehdinsight.net USERNAME
+            ssh -L 8787:localhost:8787 remoteuser@CLUSTERNAME-ed-ssh.azurehdinsight.net
             
         Replace **USERNAME** with an SSH user for your HDInsight cluster, and replace **CLUSTERNAME** with the name of your HDInsight cluster       
 
