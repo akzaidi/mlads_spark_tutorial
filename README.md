@@ -5,8 +5,7 @@
 
 ## Requirements
 
-* Azure subscription or free trial account
-    - [30 day free trial](https://azure.microsoft.com/en-us/pricing/free-trial/)
+* An Azure subscription
 * Any Bash terminal emulator, such as [Cygwin](https://www.cygwin.com/), or [putty](http://www.putty.org/)
 
 ## Deploying to Azure
@@ -21,15 +20,19 @@ Documentation Page: [Getting started with R Server on HDInsight](https://azure.m
 
     ![Image of creating a new cluster](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade3.PNG)
 
+3. **IMPORTANT**: **Don't pick** the option for the new "simpler, faster way to create clusters".
 3. Enter a name for the cluster in the __Cluster Name__ field. If you have multiple Azure subscriptions, use the __Subscription__ entry to select the one you want to use.
 
     ![Cluster name and subscription selections](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/portal-blade4.PNG)
 
 4. Select __Select Cluster Type__. On the __Cluster Type__ blade, select the following options:
 
-    * __Cluster Type__: R Server on Spark
+    * __Cluster Type__: R Server
+    * Deselect "RStudio Server Community" Install option
+        - our script will install RStudio Server for you
     * Leave the other options at the default values, then use the __Select__ button to save the cluster type.
     
+
 5. Select **Resource Group** to see a list of existing resource groups and then select the one to create the cluster in. Or, you can select **Create New** and then enter the name of the new resource group. A green check will appear to indicate that the new group name is available.
 
     > [AZURE.NOTE] This entry will default to one of your existing resource groups, if any are available.
