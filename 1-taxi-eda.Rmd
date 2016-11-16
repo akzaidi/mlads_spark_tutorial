@@ -1,0 +1,66 @@
+---
+title: "Data Manipulation with the sparklyr Package"
+output: html_document
+---
+
+# Create Spark Context
+
+The `sparklyr` package has a handy function for creating a Spark context. This differs from the method that is used by the `SparkR` package.
+
+```{r spark_context}
+
+detach("package:SparkR", unload = TRUE)
+
+library(sparklyr)
+sc <- spark_connect(master = "yarn-client")
+
+```
+
+# Download Sample Data 
+
+```{r download_data}
+
+wasb_taxi <- "/user/RevoShare/remoteuser/nyctaxi/data/"
+rxHadoopListFiles(wasb_taxi)
+
+```
+
+
+
+# Import Data
+
+To import data from csv files, we can use the `spark_read_csv` function, which is basically a wrapper for the `read.df` function using the __databricks.spark.csv__ package.
+
+```{r import_csv}
+
+taxi <- spark_read_csv(sc,
+                       path = wasb_taxi,
+                       "taxisample",
+                       header = TRUE)
+
+
+```
+
+
+## Exploratory Data Analysis
+
+```{r counts_year}
+library(dplyr)
+
+taxi %>% count
+
+year_counts <- taxi %>% 
+  mutate(year = year(tpep_pickup_datetime )) %>%
+  group_by(year) %>%
+  summarize(n = n()) %>%
+  collect()
+
+monthly_counts <- taxi %>% 
+  mutate(year = year(tpep_pickup_datetime ),
+         month = month(tpep_pickup_datetime )) %>% 
+  group_by(month, year) %>% 
+  summarize(n = n()) %>% 
+  collect()
+
+```
+

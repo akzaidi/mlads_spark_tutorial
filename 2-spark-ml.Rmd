@@ -1,0 +1,167 @@
+# Machine Learning Pipelines with Spark 
+
+Since Spark 1.3, there has been much interest in creating a simple, interactive machine learning pipeline that represents a full data science application from start to end. The `mllib` package was created to address this need.
+
+Looks very similar to the python `scikit-learn` package. For more of the available functionality, refer to [sparklyr-ml](http://spark.rstudio.com/mllib.html) website.
+
+
+# Create Training and Split
+
+In addition to modeling functions, there are numerous `mllib` functions for pre-processing and transformations. Here's well use the partition function to split our data into training and test sets.
+
+```{r split}
+
+partitions <- sample_taxi %>%
+  sdf_partition(training = 0.75, test = 0.25, seed = 1099)
+
+
+```
+
+
+
+# Fit MLlib Linear Model
+
+```{r fit_lm}
+
+fit <- partitions$training %>% 
+  filter(tip_pct < 0.5) %>% 
+  ml_linear_regression(response = "tip_pct", features = c("trip_distance"))
+fit
+
+
+```
+
+
+
+# Plot Results
+
+This may not work for larger datasets, but for our current example we can select the two columns we used in our model, and bring them into local memory for visualization.
+
+```{r plot_model}
+
+library(ggplot2)
+
+partitions$test %>%
+  select(tip_pct, trip_distance) %>%
+  filter(tip_pct < 0.5) %>% 
+  sample_n(10^5) %>% 
+  collect %>%
+  ggplot(aes(trip_distance, tip_pct)) +
+  geom_point(size = 2, alpha = 0.5) +
+  geom_abline(aes(slope = coef(fit)[["trip_distance"]],
+                  intercept = coef(fit)[["(Intercept)"]]),
+              color = "red") +
+  scale_y_continuous(label = scales::percent) +
+  labs(
+    x = "Trip Distance in Miles",
+    y = "Tip Percentage (%)",
+    title = "Linear Regression: Tip Percent ~ Trip Distance",
+    subtitle = "Spark.ML linear regression to predict tip percentage."
+  )
+
+```
+
+# Classification Tree
+
+Try out a binary classification model using the ensemble tree algoritms. 
+
+Let's first create a binary column to use as our response variable:
+
+
+```{r binary_col}
+
+
+taxi_binary <- sample_taxi %>% 
+  ft_binarizer(input_col = "tip_pct", 
+               output_col = "good_tip", 
+               threshold = 0.1) 
+
+partitions <- taxi_binary %>%
+  sdf_partition(training = 0.75, test = 0.25, seed = 1099)
+
+
+```
+
+Train a tree model
+
+```{r train_tree}
+
+fit_dtree <- partitions$training %>% 
+  ml_decision_tree(response = "good_tip", 
+                   features = c("payment_type", "passenger_count", "trip_distance"), 
+                   type = "classification")
+
+
+```
+
+Let's try predicting with the fitted decision tree model:
+
+```{r pred_tree}
+
+score_dtree <- sdf_predict(fit_dtree, partitions$test)
+# score_dtree <- predict(fit_dtree, partitions$test)
+```
+
+
+That was for a single tree. Let's try to train a ensemble tree using the random forest function:
+
+```{r forest}
+
+
+fit_dforest <- partitions$training %>% 
+  ml_random_forest(response = "good_tip", 
+                   features = c("payment_type", "passenger_count", "trip_distance"), 
+                   type = "classification")
+
+
+# score_dforest <- predict(fit_dforest, partitions$test)
+score_dforest <- sdf_predict(fit_dforest, partitions$test)
+
+
+```
+
+
+# Create a Confusion Matrix
+
+Now that we have our predicted results, we could create a confusion matrix of our predictions vs the actuals.
+
+We can consolidate predictions with the actual estimates into a single data.frame, from which we can easily calculate a confusion matrix. By encampsulating both into separate functions, it is easy to create confusion matrices for new predictions.
+
+```{r confusion_local_df}
+
+conf_df <- function(tests = partitions$test,
+                    preds = score_dtree) {
+  
+  scored_df <- data.frame(predictions = preds, 
+                          actuals = unlist(collect(select(tests, good_tip))))
+  
+  return(scored_df)
+  
+}
+
+get_confusion <- function(scored_df = conf_df()) {
+  
+  return(table(scored_df$predictions, scored_df$actuals))
+  
+}
+
+conf_tree <- get_confusion()
+
+```
+
+
+If we want to work entirely with Spark DataFrames, we can use the `sdf_predict` function and then group_by the predictiosn and actuals:
+
+
+```{r confusion_group}
+
+sdf_conf_df <- function(predictions = score_dtree) {
+  
+  
+  conf_sdf <- predictions %>% group_by(prediction, good_tip) %>% tally()
+  
+  return(conf_sdf)
+  
+}
+
+```
