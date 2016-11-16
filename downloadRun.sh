@@ -78,7 +78,7 @@ wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv
 cd /home/remoteuser/Code/MRS/
 
 hadoop fs -mkdir /HdiSamples/HdiSamples/FlightDelay
-hadoop fs -copyFromLocal data/ /HdiSamples/HdiSamples/FlightDelay/
+hadoop fs -copyFromLocal data/* /HdiSamples/HdiSamples/FlightDelay/
 
 rm -r data/
 
