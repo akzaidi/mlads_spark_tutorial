@@ -139,3 +139,12 @@ Please be aware that you won't access R Server through the head/master/name node
 7. Open a web browser and enter the following URL based on the port you entered for the tunnel.
 
         http://localhost:8787/ 
+
+## Create Azure ML Workspace
+
+
+The Operationalization script, `3-Deploy-Score-Subset.r`, creates and deploys a web service in an Azure Machine Learning workspace. Edit `azureml-settings.json` to include the "id" and "authorization_token" of your workspace. Instructions for creating an Azure Machine Learning workspace are available [here].(https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-create-workspace). Workspace ID and Authorization Tokens can be found in the "Name" and "Authorization Tokens" listings under the Settings tab in Azure Machine Learning Studio.  
+
+1. Create a workspace using the instructions provided in the link above.
+2. Get your workspace id and keys from the settings pane (tokens in the Authorization Tokens tab):
+[azuremlworkspace](https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/imgs/azureml-wsp.PNG)
