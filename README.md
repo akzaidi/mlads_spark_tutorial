@@ -7,7 +7,7 @@
 
 * Azure subscription or free trial account
     - [30 day free trial](https://azure.microsoft.com/en-us/pricing/free-trial/)
-* Bash terminal emulator Cygwin, or [putty](http://www.putty.org/)
+* Any Bash terminal emulator, such as [Cygwin](https://www.cygwin.com/), or [putty](http://www.putty.org/)
 
 ## Deploying to Azure
 

@@ -32,6 +32,46 @@ wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/m
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/azureml-settings.json
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/dTreeModelSubset.RData
 
+mkdir data/
+cd data/
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00000
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00001
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00002
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00003
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00004
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00005
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00006
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00007
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00008
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00009
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00010
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00011
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00012
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00013
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00014
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00015
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00000
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00001
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00002
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00003
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00004
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00005
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00006
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00007
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00008
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00009
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00010
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00011
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00012
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00013
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00014
+wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00015
+
+hadoop fs -mkdir /user/RevoShare/remoteuser/Airline/
+hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/Airline/
+
+
+
 ###########################################################################
 ## Store the AML token in azureml-settings.json
 ###########################################################################
