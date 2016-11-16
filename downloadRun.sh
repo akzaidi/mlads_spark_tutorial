@@ -22,6 +22,7 @@ cat raw_urls.txt | xargs -n 1 -P 6 wget -c -P data/
 hadoop fs -mkdir /user/RevoShare/remoteuser/nyctaxi
 hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/nyctaxi/
 
+rm -r data/
  
 mkdir /home/remoteuser/Code/MRS
 cd /home/remoteuser/Code/MRS
@@ -74,8 +75,12 @@ wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00014
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00015
 
+cd /home/remoteuser/Code/MRS/
+
 hadoop fs -mkdir /HdiSamples/HdiSamples/FlightDelay
 hadoop fs -copyFromLocal data/ /HdiSamples/HdiSamples/FlightDelay/
+
+rm -r data/
 
 cd /home/remoteuser
 
