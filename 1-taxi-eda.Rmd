@@ -9,6 +9,7 @@ The `sparklyr` package has a handy function for creating a Spark context. This d
 
 ```{r spark_context}
 
+rm(list = ls())
 detach("package:SparkR", unload = TRUE)
 
 library(sparklyr)
