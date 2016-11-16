@@ -21,6 +21,7 @@ mkdir data/
 cat raw_urls.txt | xargs -n 1 -P 6 wget -c -P data/
 hadoop fs -mkdir /user/RevoShare/remoteuser/nyctaxi
 hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/nyctaxi/
+rm raw_urls.txt
 
 rm -r data/
  
