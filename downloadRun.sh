@@ -11,7 +11,7 @@ mkdir Code
 mkdir Code/sparklyr
 
 # wget http://cdspsparksamples.blob.core.windows.net/hdiscripts/MLADS_Fall2016/downloadRun.sh
-wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Scripts/RunningScriptActions/github_installs.R
+wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/github_installs.R
 # chmod +x downloadRun.sh
 
 cd  /home/remoteuser/Code/sparklyr
@@ -34,6 +34,9 @@ wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/m
 
 mkdir data/
 cd data/
+
+mkdir Airline/AirlineSubsetCsv
+cd Airline/AirlineSubsetCsv
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00000
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00001
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00002
@@ -50,6 +53,9 @@ wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00013
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00014
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/AirlineSubsetCsv/part-00015
+cd ..
+mkdir WeatherSubsetCsv
+cd WeatherSubsetCsv
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00000
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00001
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00002

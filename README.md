@@ -113,7 +113,7 @@ Please be aware that you won't access R Server through the head/master/name node
 
     * On a Linux client or a Windows client (using [Cygwin](http://www.redhat.com/services/custom/cygwin/)), open a terminal session and use the following command.
 
-            ssh -L 8787:localhost:8787 USERNAME@r-server.CLUSTERNAME-ed-ssh.azurehdinsight.net
+            ssh -L 8787:localhost:8787 remoteuser@CLUSTERNAME-ed-ssh.azurehdinsight.net USERNAME
             
         Replace **USERNAME** with an SSH user for your HDInsight cluster, and replace **CLUSTERNAME** with the name of your HDInsight cluster       
 
