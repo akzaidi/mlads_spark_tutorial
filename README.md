@@ -164,6 +164,7 @@ chmod +x verification.sh
 Verification should complete in a couple of minutes, and the file `/home/remoteuser/verification.csv` will be created on the edge node. If verification succeeded, `verification.csv` should have the following contents: 
 
 ```
+remoteuser@ed0-azspar:~$ head verification.csv
 "hdfsFiles","edgeMRSFiles","edgeSparklyRFiles","sparkHPCJob","sparkHPAJob","azureMLExists","rstudioRunning" 
 TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE 
 ```
