@@ -89,7 +89,7 @@ sudo sed -i.bak "s/replaceWithToken/$amlToken/" /home/remoteuser/Code/MRS/azurem
 ## Reduce spark logging, because it slows down RStudio
 ###########################################################################
 
-sudo sed -i.bak 's/INFO/WARN/' /etc/spark/2.4.2.4-5/0/log4j.properties
+sudo sed -i.bak 's/INFO/WARN/' /etc/spark/conf/log4j.properties
 
 ###########################################################################
 ## Install packages, remove older version of packages prior to installation
