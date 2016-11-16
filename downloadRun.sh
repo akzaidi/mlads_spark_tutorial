@@ -22,8 +22,9 @@ cat raw_urls.txt | xargs -n 1 -P 6 wget -c -P data/
 hadoop fs -mkdir /user/RevoShare/remoteuser/nyctaxi
 hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/nyctaxi/
 
-
-cd  /home/remoteuser/Code/MRS
+ 
+mkdir /home/remoteuser/Code/MRS
+cd /home/remoteuser/Code/MRS
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/1-Clean-Join-Subset.r
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/2-Train-Test-Subset.r
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/3-Deploy-Score-Subset.r
@@ -76,7 +77,7 @@ wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv
 hadoop fs -mkdir /user/RevoShare/remoteuser/Airline/
 hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/Airline/
 
-
+cd /home/remoteuser
 
 ###########################################################################
 ## Store the AML token in azureml-settings.json
