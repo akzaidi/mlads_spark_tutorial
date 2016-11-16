@@ -24,6 +24,10 @@ hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/nyctaxi/
 
 rm -r data/
  
+wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/1-taxi-eda.Rmd
+wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/2-spark-ml.Rmd
+
+
 mkdir /home/remoteuser/Code/MRS
 cd /home/remoteuser/Code/MRS
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/1-Clean-Join-Subset.r
