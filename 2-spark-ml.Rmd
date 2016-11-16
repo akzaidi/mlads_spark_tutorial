@@ -11,6 +11,8 @@ In addition to modeling functions, there are numerous `mllib` functions for pre-
 
 ```{r split}
 
+sample_taxi <- taxi %>% mutate(tip_pct = tip_amount/fare_amount)
+
 partitions <- sample_taxi %>%
   sdf_partition(training = 0.75, test = 0.25, seed = 1099)
 
