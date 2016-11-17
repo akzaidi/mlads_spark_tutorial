@@ -157,7 +157,7 @@ To verify that your cluster is properly set up, run the verification script as f
 
 ```
 cd /home/remoteuser
-sudo chmod +x verification.sh`
+sudo chmod +x verification.sh
 ./verification.sh
 ```
 
