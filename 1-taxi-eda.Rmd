@@ -9,7 +9,6 @@ The `sparklyr` package has a handy function for creating a Spark context. This d
 
 ```{r spark_context}
 
-rm(list = ls())
 detach("package:SparkR", unload = TRUE)
 
 library(sparklyr)
@@ -17,7 +16,7 @@ sc <- spark_connect(master = "yarn-client")
 
 ```
 
-# Download Sample Data 
+# View Data Directory
 
 ```{r download_data}
 
@@ -53,15 +52,41 @@ taxi %>% count
 year_counts <- taxi %>% 
   mutate(year = year(tpep_pickup_datetime )) %>%
   group_by(year) %>%
-  summarize(n = n()) %>%
+  summarize(num_trips = n()) %>%
   collect()
 
 monthly_counts <- taxi %>% 
   mutate(year = year(tpep_pickup_datetime ),
          month = month(tpep_pickup_datetime )) %>% 
   group_by(month, year) %>% 
-  summarize(n = n()) %>% 
+  summarize(num_trips = n()) %>% 
   collect()
 
+```
+
+## Visualize Trip Durations
+
+```{r}
+pickup_dropoff_tbl <- taxi %>%
+  mutate(pickup_hour = hour(tpep_pickup_datetime)) %>%
+  mutate(trip_time = unix_timestamp(tpep_dropoff_datetime) - unix_timestamp(tpep_pickup_datetime)) %>%
+  group_by(pickup_hour) %>% 
+  summarize(n = n(),
+            trip_time_mean = mean(trip_time),
+            trip_time_p10 = percentile(trip_time, 0.10),
+            trip_time_p25 = percentile(trip_time, 0.25),
+            trip_time_p50 = percentile(trip_time, 0.50),
+            trip_time_p75 = percentile(trip_time, 0.75),
+            trip_time_p90 = percentile(trip_time, 0.90))
+# Collect results
+pickup_dropoff <- collect(pickup_dropoff_tbl)
+# Plot
+ggplot(pickup_dropoff, aes(x = pickup_hour)) +
+          geom_line(aes(y = trip_time_p50, alpha = "Median")) +
+          geom_ribbon(aes(ymin = trip_time_p25, ymax = trip_time_p75, 
+                          alpha = "25–75th percentile")) +
+          geom_ribbon(aes(ymin = trip_time_p10, ymax = trip_time_p90, 
+                          alpha = "10–90th percentile")) +
+          scale_y_continuous("trip duration in minutes")
 ```
 
