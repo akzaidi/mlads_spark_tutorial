@@ -1,6 +1,3 @@
-.libPaths("/usr/lib64/microsoft-r/8.0/lib64/R/library")
-setwd("/usr/lib64/microsoft-r/8.0/lib64/R/library")
-
 install.packages("devtools", repos='http://cran.us.r-project.org')
 library(devtools)
 options(unzip = 'internal')
@@ -25,4 +22,3 @@ install.packages("randomForest", repos='http://cran.us.r-project.org')
 install.packages("readr", repos='http://cran.us.r-project.org')
 install.packages("sparklyr", repos='http://cran.us.r-project.org')
 install.packages("formatR", repos='http://cran.us.r-project.org')
-install.packages("leaflet", repos='http://cran.us.r-project.org')
