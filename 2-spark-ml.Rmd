@@ -179,3 +179,24 @@ dforest_conf %>% conf_spread
 
 
 ```
+
+
+# Using the Spark ML Utility Functions
+
+While it is easy for binary classification models to create the confusion matrices and manually calculate many model metrics, SparkML provides numerous helper functions for calculating these metrics directly from the predicted data source.
+
+
+```{r sdf_model_metrics}
+
+dtree_auc <- ml_binary_classification_eval(predicted_tbl_spark = score_dtree, label = "good_tip", score = "probability")
+
+dforest_auc <- ml_binary_classification_eval(predicted_tbl_spark = score_dforest, label = "good_tip", score = "probability")
+
+
+### metric choices: c("f1", "precision", "recall", "weightedPrecision", "weightedRecall", "accuracy")
+
+dforest_accuracy <- ml_classification_eval(predicted_tbl_spark = score_dforest, label = "good_tip", predicted_lbl = "prediction", metric = "accuracy")
+
+```
+
+
