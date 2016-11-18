@@ -2,6 +2,7 @@
 
 *Instructors*: Debraj GuhaThakurta, Mario Inchiosa, Katherine Zhao, Ali Zaidi
 
+# [Course Scripts: aka.ms/mlads_spark](aka.ms/mlads_spark)
 
 ## Requirements
 
