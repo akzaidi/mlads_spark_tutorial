@@ -1,8 +1,8 @@
 # Machine Learning Pipelines with Spark 
 
-Since Spark 1.3, there has been much interest in creating a simple, interactive machine learning pipeline that represents a full data science application from start to end. The `mllib` package was created to address this need.
+Since Spark 1.3, there has been much interest in packages and platforms that can create a simple, interactive machine learning pipeline that represents a full data science application from start to end. The `mllib` package was created to address this need within the Spark ecosystem.
 
-Looks very similar to the python `scikit-learn` package. For more of the available functionality, refer to [sparklyr-ml](http://spark.rstudio.com/mllib.html) website.
+It looks very similar to the python `scikit-learn` package. Here we will examine the RStudio package for doing Spark ML through an R package. For more of the available functionality, refer to [sparklyr-ml](http://spark.rstudio.com/mllib.html) website.
 
 
 # Create Training and Split
@@ -65,7 +65,7 @@ partitions$test %>%
 
 # Classification Tree
 
-Try out a binary classification model using the ensemble tree algoritms. 
+Let's try out a binary classification model using the ensemble tree algoritms. 
 
 Let's first create a binary column to use as our response variable:
 
@@ -78,7 +78,8 @@ taxi_binary <- sample_taxi %>%
                output_col = "good_tip", 
                threshold = 0.1) 
 
-partitions <- taxi_binary %>%
+partitions <- taxi_binary %>% 
+  filter(!is.na(good_tip)) %>% 
   sdf_partition(training = 0.75, test = 0.25, seed = 1099)
 
 
@@ -90,7 +91,7 @@ Train a tree model
 
 fit_dtree <- partitions$training %>% 
   ml_decision_tree(response = "good_tip", 
-                   features = c("payment_type", "passenger_count", "trip_distance"), 
+                   features = c("pickup_longitude", "passenger_count", "pickup_latitude"), 
                    type = "classification")
 
 
@@ -112,7 +113,7 @@ That was for a single tree. Let's try to train a ensemble tree using the random 
 
 fit_dforest <- partitions$training %>% 
   ml_random_forest(response = "good_tip", 
-                   features = c("payment_type", "passenger_count", "trip_distance"), 
+                   features = c("pickup_longitude", "passenger_count", "pickup_latitude"), 
                    type = "classification")
 
 
@@ -127,7 +128,7 @@ score_dforest <- sdf_predict(fit_dforest, partitions$test)
 
 Now that we have our predicted results, we could create a confusion matrix of our predictions vs the actuals.
 
-We can consolidate predictions with the actual estimates into a single data.frame, from which we can easily calculate a confusion matrix. By encampsulating both into separate functions, it is easy to create confusion matrices for new predictions.
+We can consolidate predictions with the actual estimates into a single `data.frame`, from which we can easily calculate a confusion matrix, and use with any R package for calculating model metrics or creating visualizations. By encampsulating both into separate functions, it is easy to create confusion matrices for new predictions.
 
 ```{r confusion_local_df}
 
@@ -147,12 +148,12 @@ get_confusion <- function(scored_df = conf_df()) {
   
 }
 
-conf_tree <- get_confusion()
+# conf_tree <- get_confusion()
 
 ```
 
 
-If we want to work entirely with Spark DataFrames, we can use the `sdf_predict` function and then group_by the predictiosn and actuals:
+However, the above functions will create a local R `data.frame`. If we want to work entirely with Spark DataFrames, we can use the `sdf_predict` function and then use `group_by` to tabulate the predicted classes with the actual classes:
 
 
 ```{r confusion_group}
@@ -165,5 +166,16 @@ sdf_conf_df <- function(predictions = score_dtree) {
   return(conf_sdf)
   
 }
+
+dtree_conf <- sdf_conf_df() %>% collect
+dforest_conf <- sdf_conf_df(score_dforest) %>% collect
+
+library(tidyr)
+
+conf_spread <- . %>% spread(key = "good_tip", value = "n")
+
+dtree_conf %>% conf_spread 
+dforest_conf %>% conf_spread
+
 
 ```
