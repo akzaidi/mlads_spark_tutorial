@@ -8,8 +8,7 @@ output: html_document
 The `sparklyr` package has a handy function for creating a Spark context. This differs from the method that is used by the `SparkR` package.
 
 ```{r spark_context}
-
-detach("package:SparkR", unload = TRUE)
+if ("SparkR" %in% loadedNamespaces()) detach("package:SparkR", unload = TRUE)
 
 library(sparklyr)
 sc <- spark_connect(master = "yarn-client")
@@ -21,8 +20,8 @@ sc <- spark_connect(master = "yarn-client")
 ```{r download_data}
 
 wasb_taxi <- "/user/RevoShare/remoteuser/nyctaxi/data/"
-rxHadoopListFiles(wasb_taxi)
-
+hdfs_ls <- paste0("hadoop fs -ls ", wasb_taxi)
+system(hdfs_ls)
 ```
 
 
@@ -67,6 +66,9 @@ monthly_counts <- taxi %>%
 ## Visualize Trip Durations
 
 ```{r}
+
+library(ggplot2)
+
 pickup_dropoff_tbl <- taxi %>%
   mutate(pickup_hour = hour(tpep_pickup_datetime)) %>%
   mutate(trip_time = unix_timestamp(tpep_dropoff_datetime) - unix_timestamp(tpep_pickup_datetime)) %>%
