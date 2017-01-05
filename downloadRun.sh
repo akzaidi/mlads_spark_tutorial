@@ -3,7 +3,7 @@ amlToken=$1
 ###########################################################################
 ## Download scripts and code files into directories
 ###########################################################################
-cd /home/remoteuser
+cd /home/diispark
 if [[ -f github_installs.R ]]; then sudo rm -Rf github_installs*; fi;
 # if [[ -f downloadRun.sh ]]; then sudo rm -Rf downloadRun*; fi;
 if [[ -d Code ]]; then sudo rm -Rf Code; fi;
@@ -14,13 +14,13 @@ mkdir Code/sparklyr
 wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/github_installs.R
 # chmod +x downloadRun.sh
 
-cd  /home/remoteuser/Code/sparklyr
+cd  /home/diispark/Code/sparklyr
 # We need to copy code files for sparklyr exercise from Ali's GitHub repo in this folder
 wget https://raw.githubusercontent.com/akzaidi/spark_nyc_taxi/master/raw_urls.txt
 mkdir data/
 cat raw_urls.txt | xargs -n 1 -P 6 wget -c -P data/
-hadoop fs -mkdir /user/RevoShare/remoteuser/nyctaxi
-hadoop fs -copyFromLocal data/ /user/RevoShare/remoteuser/nyctaxi/
+hadoop fs -mkdir /user/RevoShare/diispark/nyctaxi
+hadoop fs -copyFromLocal data/ /user/RevoShare/diispark/nyctaxi/
 rm raw_urls.txt
 
 rm -r data/
@@ -29,8 +29,8 @@ wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/1-tax
 wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/2-spark-ml.Rmd
 
 
-mkdir /home/remoteuser/Code/MRS
-cd /home/remoteuser/Code/MRS
+mkdir /home/diispark/Code/MRS
+cd /home/diispark/Code/MRS
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/1-Clean-Join-Subset.r
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/2-Train-Test-Subset.r
 wget https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/KDDCup2016/Code/MRS/3-Deploy-Score-Subset.r
@@ -80,20 +80,20 @@ wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00014
 wget http://cdspsparksamples.blob.core.windows.net/data/Airline/WeatherSubsetCsv/part-00015
 
-cd /home/remoteuser/Code/MRS/
+cd /home/diispark/Code/MRS/
 
 hadoop fs -mkdir /HdiSamples/HdiSamples/FlightDelay
 hadoop fs -copyFromLocal data/* /HdiSamples/HdiSamples/FlightDelay/
 
 rm -r data/
 
-cd /home/remoteuser
+cd /home/diispark
 
 ###########################################################################
 ## Store the AML token in azureml-settings.json
 ###########################################################################
 
-sudo sed -i.bak "s/replaceWithToken/$amlToken/" /home/remoteuser/Code/MRS/azureml-settings.json
+sudo sed -i.bak "s/replaceWithToken/$amlToken/" /home/diispark/Code/MRS/azureml-settings.json
 
 ###########################################################################
 ## Reduce spark logging, because it slows down RStudio
@@ -104,7 +104,7 @@ sudo sed -i.bak 's/INFO/WARN/' /etc/spark/conf/log4j.properties
 ###########################################################################
 ## Install packages, remove older version of packages prior to installation
 ###########################################################################
-cd /home/remoteuser
+cd /home/diispark
 
 # The tibble package now requires /bin/gtar
 sudo ln -s /bin/tar /bin/gtar
@@ -134,19 +134,19 @@ if [[ -d fpp ]]; then sudo rm -Rf fpp; fi;
 if [[ -d randomForest ]]; then sudo rm -Rf randomForest; fi;
 if [[ -d readr ]]; then sudo rm -Rf readr; fi;
 
-cd /home/remoteuser/R/x86_64-pc-linux-gnu-library/3.2
+cd /home/diispark/R/x86_64-pc-linux-gnu-library/3.2
 if [[ -d rmarkdown ]]; then sudo rm -Rf rmarkdown; fi;
 
 ###########################################################################
 ## Call R file to install packages
 ###########################################################################
-cd /home/remoteuser
-sudo R --vanilla --quiet  <  /home/remoteuser/github_installs.R
+cd /home/diispark
+sudo R --vanilla --quiet  <  /home/diispark/github_installs.R
 
 ###########################################################################
 ## Install Rstudio
 ###########################################################################
-sudo cd /home/remoteuser
+sudo cd /home/diispark
 sudo wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/InstallRStudio.sh
 sudo chmod 755 InstallRStudio.sh
 sudo ./InstallRStudio.sh
@@ -154,11 +154,11 @@ sudo ./InstallRStudio.sh
 ###########################################################################
 ## Change permission of Code directory
 ###########################################################################
-sudo chmod -R 777 /home/remoteuser/Code
+sudo chmod -R 777 /home/diispark/Code
 
 ###########################################################################
 ## Set final working directory
 ###########################################################################
-cd /home/remoteuser
+cd /home/diispark
 
 wget https://raw.githubusercontent.com/akzaidi/mlads_spark_tutorial/master/verification.sh
